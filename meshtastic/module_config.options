@@ -26,3 +26,5 @@
 
 *DetectionSensorConfig.monitor_pin int_size:8
 *DetectionSensorConfig.name max_size:20
+
+*KiezboxControlConfig.available_pins max_count:4

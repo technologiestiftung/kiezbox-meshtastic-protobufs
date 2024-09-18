@@ -124,6 +124,7 @@ message AdminMessage {
 
     /*
      * TODO: REPLACE
+     * TODO: DO I NEED THIS FOR KIEZBOX? See also other remote hardware stuff in this file
      */
     REMOTEHARDWARE_CONFIG = 8;
 

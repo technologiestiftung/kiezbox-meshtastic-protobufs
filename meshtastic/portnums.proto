@@ -213,6 +213,13 @@ enum PortNum {
    * ENCODING: libcotshrink
    */
   ATAK_FORWARDER = 257;
+  
+  /*
+   * Reserved for built-in GPIO/example app.
+   * See remote_hardware.proto/HardwareMessage for details on the message sent/received to this port number
+   * ENCODING: Protobuf
+   */
+  KIEZBOX_CONTROL_APP = 258;
 
   /*
    * Currently we limit port nums to no higher than this value

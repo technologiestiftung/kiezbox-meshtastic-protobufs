@@ -118,6 +118,26 @@ message ModuleConfig {
   }
 
   /*
+   * KiezboxControlModule Config
+   */
+  message KiezboxControlConfig {
+    /*
+     * Whether the Module is enabled
+     */
+    bool enabled = 1;
+
+    /*
+     * Whether the Module allows consumers to read / write to pins not defined in available_pins
+     */
+    bool allow_undefined_pin_access = 2;
+
+    /*
+     * Exposes the available pins to the mesh for reading and writing
+     */
+    repeated RemoteHardwarePin available_pins = 3;
+  }
+
+  /*
    * NeighborInfoModule Config
    */
   message NeighborInfoConfig {
@@ -769,6 +789,11 @@ message ModuleConfig {
      * TODO: REPLACE
      */
     PaxcounterConfig paxcounter = 13;
+
+    /*
+     * TODO: REPLACE
+     */
+    KiezboxControlConfig kiezbox_control = 14;
   }
 }
 
