@@ -72,4 +72,20 @@ message KiezboxMessage {
    * Not used for all MessageTypes, see MessageType for details
    */
   uint64 gpio_value = 3;
+
+  message KiezboxStatus {
+      uint32 kb_id = 1; // only 16 bit used
+      int64 unix_time = 2; // seconds since unix epoch
+      int32 temperature_out = 3; // in uCelsius
+      int32 temperature_in = 4; // in uCelsius
+      int32 humidity_in = 5; // in u%
+      uint32 solar_voltage = 6; // in mV
+      uint32 solar_power = 7; // in W
+      uint32 solar_energy_day = 8; // in kWh/100
+      uint32 solar_energy_total = 9; // in kWh/100
+      uint32 battery_voltage = 10; // in mV
+      uint32 battery_current = 11; // in mV
+      int32 temperature_rtc = 12; // in uClesius
+  }
+  optional KiezboxStatus status = 4;
 }
