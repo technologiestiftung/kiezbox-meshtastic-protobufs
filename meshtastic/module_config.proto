@@ -130,6 +130,16 @@ message ModuleConfig {
      * Sets the next (inteval) at which a status should be send
      */
     int32 status_interval = 2;
+    
+    /*
+     * Override the default power pin
+     */
+    int32 power_pin_override = 3;
+
+    /*
+     * Uniq ID of the kiexbox
+     */
+    int32 kb_id = 4;
   }
 
   /*
