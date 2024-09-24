@@ -127,14 +127,9 @@ message ModuleConfig {
     bool enabled = 1;
 
     /*
-     * Whether the Module allows consumers to read / write to pins not defined in available_pins
+     * Sets the next (inteval) at which a status should be send
      */
-    bool allow_undefined_pin_access = 2;
-
-    /*
-     * Exposes the available pins to the mesh for reading and writing
-     */
-    repeated RemoteHardwarePin available_pins = 3;
+    int32 status_interval = 2;
   }
 
   /*
