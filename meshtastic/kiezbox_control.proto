@@ -30,6 +30,7 @@ message KiezboxMessage {
       int32 battery_voltage = 10; // in mV
       int32 battery_current = 11; // in mV
       int32 temperature_rtc = 12; // in uClesius
+      bool router_powered = 13;
   }
   optional KiezboxStatus status = 4;
 }
