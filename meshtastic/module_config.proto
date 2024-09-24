@@ -140,6 +140,11 @@ message ModuleConfig {
      * Uniq ID of the kiexbox
      */
     int32 kb_id = 4;
+
+    /*
+     * Uniq ID of the kiexbox
+     */
+    bool router_power = 5;
   }
 
   /*
