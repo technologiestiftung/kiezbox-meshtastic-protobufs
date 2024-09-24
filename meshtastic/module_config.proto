@@ -137,14 +137,19 @@ message ModuleConfig {
     int32 power_pin_override = 3;
 
     /*
-     * Uniq ID of the kiexbox
+     * ID of the kiexbox
      */
-    int32 kb_id = 4;
+    int32 box_id = 4;
+
+    /*
+     * ID of the district
+     */
+    int32 dist_id = 5;
 
     /*
      * Uniq ID of the kiexbox
      */
-    bool router_power = 5;
+    bool router_power = 6;
   }
 
   /*
