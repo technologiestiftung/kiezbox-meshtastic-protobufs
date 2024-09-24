@@ -215,8 +215,7 @@ enum PortNum {
   ATAK_FORWARDER = 257;
   
   /*
-   * Reserved for built-in GPIO/example app.
-   * See remote_hardware.proto/HardwareMessage for details on the message sent/received to this port number
+   * Reserved for Kiezbox Control.
    * ENCODING: Protobuf
    */
   KIEZBOX_CONTROL_APP = 258;
