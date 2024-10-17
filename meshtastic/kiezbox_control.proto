@@ -18,20 +18,33 @@ message KiezboxMessage {
    */
 
   message KiezboxStatus {
+      // A kiezbox is identified by its box ID and distrcit ID
       uint32 box_id = 1; // only 8 bit used
       uint32 dist_id = 2; // only 8 bit used
+      // The current power state of the connected WiFi router
       bool router_powered = 3;
-      int64 unix_time = 4; // seconds since unix epoch
-      int32 temperature_out = 5; // in uCelsius
-      int32 temperature_in = 6; // in uCelsius
-      int32 humidity_in = 7; // in u%
-      int32 solar_voltage = 8; // in mV
-      int32 solar_power = 9; // in W
-      int32 solar_energy_day = 10; // in kWh/100
-      int32 solar_energy_total = 11; // in kWh/100
-      int32 battery_voltage = 12; // in mV
-      int32 battery_current = 13; // in mV
-      int32 temperature_rtc = 14; // in uClesius
+      // Unix timpestamp ( in seconds ), when the measurement was taken
+      int64 unix_time = 4;
+      // Temperature outside (but close) to the kiezbox ( in milli Celsius / m°C )
+      int32 temperature_out = 5;
+      // Temperature inside the kiezbox ( in milli Celsius / m°C )
+      int32 temperature_in = 6;
+      // Relative humidity inside the kiezbox ( as milli Percentage / m% )
+      int32 humidity_in = 7;
+      // Voltage of the solar panel ( in milli Volt / mV )
+      int32 solar_voltage = 8;
+      // Power output of the solar panel ( in Watt / W )
+      int32 solar_power = 9;
+      // Energy collected by the solar panel today ( in Watt/100 / dW )
+      int32 solar_energy_day = 10;
+      // Energy collected by the solar panel in total ( in Watt/100 / dW )
+      int32 solar_energy_total = 11;
+      // Voltage of the (main) battery ( in milli Volt / mV )
+      int32 battery_voltage = 12;
+      // Current of the (main) battery ( in milli Amps / mA )
+      int32 battery_current = 13;
+      // Temperature of the Real-time clock used in the kiezbox ( in milli Celsius / m°C )
+      int32 temperature_rtc = 14;
   }
   optional KiezboxStatus status = 4;
 }
