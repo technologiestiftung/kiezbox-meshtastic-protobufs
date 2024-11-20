@@ -13,38 +13,96 @@ option swift_prefix = "";
  * KIEZBOX_CONTROL_APP PortNums.
  */
 message KiezboxMessage {
-  /*
-   * TODO: Add other message types/features
-   */
-
-  message KiezboxStatus {
-      // A kiezbox is identified by its box ID and distrcit ID
+  // Meta information identifying the box
+  message Meta {
       uint32 box_id = 1; // only 8 bit used
       uint32 dist_id = 2; // only 8 bit used
-      // The current power state of the connected WiFi router
-      bool router_powered = 3;
-      // Unix timpestamp ( in seconds ), when the measurement was taken
-      int64 unix_time = 4;
-      // Temperature outside (but close) to the kiezbox ( in milli Celsius / m°C )
-      int32 temperature_out = 5;
-      // Temperature inside the kiezbox ( in milli Celsius / m°C )
-      int32 temperature_in = 6;
-      // Relative humidity inside the kiezbox ( as milli Percentage / m% )
-      int32 humidity_in = 7;
-      // Voltage of the solar panel ( in milli Volt / mV )
-      int32 solar_voltage = 8;
-      // Power output of the solar panel ( in Watt / W )
-      int32 solar_power = 9;
-      // Energy collected by the solar panel today ( in Watt/100 / dW )
-      int32 solar_energy_day = 10;
-      // Energy collected by the solar panel in total ( in Watt/100 / dW )
-      int32 solar_energy_total = 11;
-      // Voltage of the (main) battery ( in milli Volt / mV )
-      int32 battery_voltage = 12;
-      // Current of the (main) battery ( in milli Amps / mA )
-      int32 battery_current = 13;
-      // Temperature of the Real-time clock used in the kiezbox ( in milli Celsius / m°C )
-      int32 temperature_rtc = 14;
   }
-  optional KiezboxStatus status = 4;
+  // Modes a kiezbox can be in
+  enum Mode {
+      maintenance = 0;
+      normal = 1;
+      emergency = 2;
+  }
+  // Message to control one or multiple boxes
+  message Control {
+      Mode mode = 1;
+      Router router = 2;
+  }
+  // Periodic update message containing optional core or sensor data
+  message Update {
+      Meta meta = 1;
+      // Unix timestamp ( in seconds ), when the measurements were taken
+      int64 unix_time = 2;
+      optional Core core = 3;
+      optional Sensor sensor = 4;
+  }
+  // Contains general router status and internal sensor values
+  message Core {
+      Mode mode = 1;
+      Router router = 2;
+      CoreValues values = 3;
+  }
+  // Router status information
+  message Router {
+      // True if power is supplied to the router
+      bool powered = 1;
+      // Router firmware software version
+      // For OpenWrt this would be VERSION="23.05.2"
+      optional string sw_version = 2;
+      // Router model name
+      optional string model = 3;
+  }
+  // Sensor values measured at the core
+  message CoreValues {
+      // Temperature outside (C)
+      int32 temp_out = 1;
+      // Temperature inside (C)
+      int32 temp_in = 2;
+      // Relative humidity inside (%)
+      int32 humid_in = 3;
+      // Voltage of the solar panel (V)
+      int32 solar_voltage = 4;
+      // Power output of the solar panel (W)
+      int32 solar_power = 5;
+      // Energy collected by the solar panel today (Wh)
+      int32 solar_energy_day = 6;
+      // Energy collected by the solar panel in total (Wh)
+      int32 solar_energy_total = 7;
+      // Voltage of the (main) battery (V)
+      int32 battery_voltage = 8;
+      // Current of the (main) battery (A)
+      int32 battery_current = 9;
+      // Temperature of the realtime clock (C)
+      int32 temp_rtc = 10;
+  }
+  // Contains a set of sensor values and a sensor id
+  message Sensor {
+      // ID of the sensor
+      uint32 sens_id = 1;
+      SensorValues values = 2;
+  }
+  // Sensor values measured at the sensor module
+  message SensorValues {
+      // [ BME Sensor ]
+      // Temperature (C)
+      optional uint32 temp_main = 1;
+      // Humidity (%)
+      optional uint32 humid_main = 2;
+      // Pressue (??)
+      optional uint32 pressure = 3;
+      // Air Quality (??)
+      optional uint32 air_quality = 4;
+      // Particles
+      // particles 1um (??)
+      optional uint32 part_pm_2_5 = 5;
+      // particles 2.5um (??)
+      optional uint32 part_pm_10 = 6;
+      // Noise (??)
+      optional uint32 noise = 7;
+      // Temperature of the rtc (C)
+      optional uint32 temp_rtc = 8;
+  }
+  optional Update update = 4;
+  optional Control control = 5;
 }
