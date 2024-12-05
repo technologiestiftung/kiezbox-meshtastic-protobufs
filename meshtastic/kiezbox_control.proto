@@ -14,94 +14,122 @@ option swift_prefix = "";
  */
 message KiezboxMessage {
   // Meta information identifying the box
+  // Also used as tags in the Database
   message Meta {
-      uint32 box_id = 1; // only 8 bit used
-      uint32 dist_id = 2; // only 8 bit used
+    // ID if the Kiezbox
+    optional uint32 box_id = 1; // only 8 bit used
+    // ID of the district the box is assigned to
+    optional uint32 dist_id = 2; // only 8 bit used
+    // ID of the sensor if this is a sensor module
+    optional uint32 sens_id = 3;
+    // Which type of device the controller should be
+    optional DeviceType dev_type = 4;
   }
   // Modes a kiezbox can be in
   enum Mode {
-      maintenance = 0;
-      normal = 1;
-      emergency = 2;
+    maintenance = 0;
+    normal = 1;
+    emergency = 2;
+  }
+  // Device Type of the kiezbox
+  enum DeviceType {
+    // A core control module
+    core = 0;
+    // A dedicated sensor box
+    sensor = 1;
+    // A info dipslay
+    display = 2;
   }
   // Message to control one or multiple boxes
-  message Control {
-      Mode mode = 1;
-      Router router = 2;
+  message Request {
+    Meta meta = 1;
+    optional Type type = 2;
+    enum Type {
+      Update = 0;
+    }
+  }
+  message Control  {
+    oneof set {
+        Mode mode = 1;
+        int64 unix_time = 2;
+        bool router_power = 3;
+        uint32 box_id = 4;
+        uint32 dist_id = 5;
+        uint32 sens_id = 6;
+        int32 status_interval = 7;
+    }
   }
   // Periodic update message containing optional core or sensor data
   message Update {
-      Meta meta = 1;
-      // Unix timestamp ( in seconds ), when the measurements were taken
-      int64 unix_time = 2;
-      optional Core core = 3;
-      optional Sensor sensor = 4;
+    Meta meta = 1;
+    // Unix timestamp ( in seconds ), when the measurements were taken
+    int64 unix_time = 2;
+    optional Core core = 3;
+    optional Sensor sensor = 4;
   }
   // Contains general router status and internal sensor values
   message Core {
-      Mode mode = 1;
-      Router router = 2;
-      CoreValues values = 3;
+    Mode mode = 1;
+    Router router = 2;
+    CoreValues values = 3;
   }
   // Router status information
   message Router {
-      // True if power is supplied to the router
-      bool powered = 1;
-      // Router firmware software version
-      // For OpenWrt this would be VERSION="23.05.2"
-      optional string sw_version = 2;
-      // Router model name
-      optional string model = 3;
+    // True if power is supplied to the router
+    bool powered = 1;
+    // Router firmware software version
+    // For OpenWrt this would be VERSION="23.05.2"
+    optional string sw_version = 2;
+    // Router model name
+    optional string model = 3;
   }
   // Sensor values measured at the core
   message CoreValues {
-      // Temperature outside (C)
-      int32 temp_out = 1;
-      // Temperature inside (C)
-      int32 temp_in = 2;
-      // Relative humidity inside (%)
-      int32 humid_in = 3;
-      // Voltage of the solar panel (V)
-      int32 solar_voltage = 4;
-      // Power output of the solar panel (W)
-      int32 solar_power = 5;
-      // Energy collected by the solar panel today (Wh)
-      int32 solar_energy_day = 6;
-      // Energy collected by the solar panel in total (Wh)
-      int32 solar_energy_total = 7;
-      // Voltage of the (main) battery (V)
-      int32 battery_voltage = 8;
-      // Current of the (main) battery (A)
-      int32 battery_current = 9;
-      // Temperature of the realtime clock (C)
-      int32 temp_rtc = 10;
+    // Temperature outside (C)
+    optional int32 temp_out = 1;
+    // Temperature inside (C)
+    optional int32 temp_in = 2;
+    // Relative humidity inside (%)
+    optional int32 humid_in = 3;
+    // Voltage of the solar panel (V)
+    optional int32 solar_voltage = 4;
+    // Power output of the solar panel (W)
+    optional int32 solar_power = 5;
+    // Energy collected by the solar panel today (Wh)
+    optional int32 solar_energy_day = 6;
+    // Energy collected by the solar panel in total (Wh)
+    optional int32 solar_energy_total = 7;
+    // Voltage of the (main) battery (V)
+    optional int32 battery_voltage = 8;
+    // Current of the (main) battery (A)
+    optional int32 battery_current = 9;
+    // Temperature of the realtime clock (C)
+    optional int32 temp_rtc = 10;
   }
   // Contains a set of sensor values and a sensor id
   message Sensor {
-      // ID of the sensor
-      uint32 sens_id = 1;
-      SensorValues values = 2;
+    SensorValues values = 1;
   }
   // Sensor values measured at the sensor module
   message SensorValues {
-      // [ BME Sensor ]
-      // Temperature (C)
-      optional uint32 temp_main = 1;
-      // Humidity (%)
-      optional uint32 humid_main = 2;
-      // Pressue (??)
-      optional uint32 pressure = 3;
-      // Air Quality (??)
-      optional uint32 air_quality = 4;
-      // Particles
-      // particles 1um (??)
-      optional uint32 part_pm_2_5 = 5;
-      // particles 2.5um (??)
-      optional uint32 part_pm_10 = 6;
-      // Noise (??)
-      optional uint32 noise = 7;
-      // Temperature of the rtc (C)
-      optional uint32 temp_rtc = 8;
+    // [ BME Sensor ]
+    // Temperature (C)
+    optional uint32 temp_main = 1;
+    // Humidity (%)
+    optional uint32 humid_main = 2;
+    // Pressue (Pa)
+    optional uint32 pressure = 3;
+    // Air Quality (??)
+    optional uint32 air_quality = 4;
+    // Particles
+    // particles 1um (??)
+    optional uint32 part_pm_2_5 = 5;
+    // particles 2.5um (??)
+    optional uint32 part_pm_10 = 6;
+    // Noise (??)
+    optional uint32 noise = 7;
+    // Temperature of the rtc (C)
+    optional uint32 temp_rtc = 8;
   }
   optional Update update = 4;
   optional Control control = 5;

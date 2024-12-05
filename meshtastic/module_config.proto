@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package meshtastic;
 
+import "meshtastic/kiezbox_control.proto";
+
 option csharp_namespace = "Meshtastic.Protobufs";
 option go_package = "github.com/meshtastic/go/generated";
 option java_outer_classname = "ModuleConfigProtos";
@@ -145,11 +147,27 @@ message ModuleConfig {
      * ID of the district
      */
     int32 dist_id = 5;
+    
+    /*
+     * ID of the district
+     */
+    int32 sens_id = 6;
 
     /*
-     * Uniq ID of the kiexbox
+     * Power state target of the connected router
      */
-    bool router_power = 6;
+    bool router_power = 7;
+    
+    /*
+     * Mode target of the connected router
+     */
+    KiezboxMessage.Mode mode = 8;
+    
+    /*
+     * Mode target of the connected router
+     */
+    KiezboxMessage.DeviceType dev_type = 9;
+
   }
 
   /*
