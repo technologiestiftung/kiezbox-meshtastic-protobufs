@@ -114,22 +114,22 @@ message KiezboxMessage {
   message SensorValues {
     // [ BME Sensor ]
     // Temperature (C)
-    optional uint32 temp_main = 1;
+    optional int32 temp_main = 1;
     // Humidity (%)
-    optional uint32 humid_main = 2;
+    optional int32 humid_main = 2;
     // Pressue (Pa)
-    optional uint32 pressure = 3;
+    optional int32 pressure = 3;
     // Air Quality (??)
-    optional uint32 air_quality = 4;
+    optional int32 air_quality = 4;
     // Particles
     // particles 1um (??)
-    optional uint32 part_pm25 = 5;
+    optional int32 part_pm25 = 5;
     // particles 2.5um (??)
-    optional uint32 part_pm10 = 6;
+    optional int32 part_pm10 = 6;
     // Noise (??)
-    optional uint32 noise = 7;
+    optional int32 noise = 7;
     // Temperature of the rtc (C)
-    optional uint32 temp_rtc = 8;
+    optional int32 temp_rtc = 8;
   }
   optional Update update = 4;
   optional Control control = 5;
