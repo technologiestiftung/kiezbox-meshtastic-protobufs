@@ -123,9 +123,9 @@ message KiezboxMessage {
     optional uint32 air_quality = 4;
     // Particles
     // particles 1um (??)
-    optional uint32 part_pm_2_5 = 5;
+    optional uint32 part_pm25 = 5;
     // particles 2.5um (??)
-    optional uint32 part_pm_10 = 6;
+    optional uint32 part_pm10 = 6;
     // Noise (??)
     optional uint32 noise = 7;
     // Temperature of the rtc (C)
