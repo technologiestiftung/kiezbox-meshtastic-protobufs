@@ -168,6 +168,10 @@ message ModuleConfig {
      */
     KiezboxMessage.DeviceType dev_type = 9;
 
+    /*
+     * Sets the warmup time for the sds dust sensor
+     */
+    int32 sds_warmup_time = 10;
   }
 
   /*
