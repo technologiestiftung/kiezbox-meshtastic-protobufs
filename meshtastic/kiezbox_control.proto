@@ -130,6 +130,8 @@ message KiezboxMessage {
     optional int32 noise = 7;
     // Temperature of the rtc (C)
     optional int32 temp_rtc = 8;
+    // Voltage of the (main) battery (V)
+    optional int32 battery_voltage = 9;
   }
   optional Update update = 4;
   optional Control control = 5;
