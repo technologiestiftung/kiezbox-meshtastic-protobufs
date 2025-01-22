@@ -39,6 +39,8 @@ message KiezboxMessage {
     sensor = 1;
     // A info dipslay
     display = 2;
+    // The emergency button
+    button = 3;
   }
   // Message to control one or multiple boxes
   message Request {

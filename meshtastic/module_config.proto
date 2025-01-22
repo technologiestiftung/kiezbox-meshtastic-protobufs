@@ -149,7 +149,7 @@ message ModuleConfig {
     int32 dist_id = 5;
     
     /*
-     * ID of the district
+     * ID of the sensor box
      */
     int32 sens_id = 6;
 
@@ -172,6 +172,11 @@ message ModuleConfig {
      * Sets the warmup time for the sds dust sensor
      */
     int32 sds_warmup_time = 10;
+
+    /*
+     * ID of the emergency button
+     */
+    int32 button_id = 11;
   }
 
   /*
