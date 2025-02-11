@@ -135,6 +135,29 @@ message KiezboxMessage {
     // Voltage of the (main) battery (V)
     optional int32 battery_voltage = 9;
   }
+  message Emergency {
+    // Type of the emergency
+    EmergencyType type = 1;
+    // ID of the button sending the emergency
+    int32 button_id = 2;
+    // Unix timestamp ( in seconds ), when the emergency happend
+    int64 unix_time = 3;
+    // Optional message describing what happened
+    optional string message = 4;
+  }
+  enum EmergencyType {
+    // Medical emergency
+    medical = 0;
+    // Fire emergency
+    fire = 1;
+    // Crime emergency
+    crime = 2;
+    // Sick emergency
+    sick = 3;
+    // Help emergency
+    help = 4;
+  }
   optional Update update = 4;
   optional Control control = 5;
+  optional Emergency distress = 6;
 }
