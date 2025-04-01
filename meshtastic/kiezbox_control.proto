@@ -68,6 +68,8 @@ message KiezboxMessage {
     int64 unix_time = 2;
     optional Core core = 3;
     optional Sensor sensor = 4;
+    // Unix timestamp ( in seconds ), when the measurements arrived at the database gateway
+    optional int64 arrival_time = 5;
   }
   // Contains general router status and internal sensor values
   message Core {
