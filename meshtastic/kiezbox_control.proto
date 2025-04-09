@@ -42,7 +42,8 @@ message KiezboxMessage {
     // The emergency button
     button = 3;
   }
-  // Message to control one or multiple boxes
+  // Messages to control one or multiple boxes
+  // Request messages can be used to request a specific response/update from a set of boxes
   message Request {
     Meta meta = 1;
     optional Type type = 2;
@@ -50,15 +51,17 @@ message KiezboxMessage {
       Update = 0;
     }
   }
-  message Control  {
+  // Control messages can be used to set a variable or other parameter for a set of boxes
+  message Control {
+    Meta meta = 1;
     oneof set {
-        Mode mode = 1;
-        int64 unix_time = 2;
-        bool router_power = 3;
-        uint32 box_id = 4;
-        uint32 dist_id = 5;
-        uint32 sens_id = 6;
-        int32 status_interval = 7;
+        Mode mode = 2;
+        int64 unix_time = 3;
+        bool router_power = 4;
+        uint32 box_id = 5;
+        uint32 dist_id = 6;
+        uint32 sens_id = 7;
+        int32 status_interval = 8;
     }
   }
   // Periodic update message containing optional core or sensor data
