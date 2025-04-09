@@ -135,6 +135,7 @@ message ModuleConfig {
     
     /*
      * Override the default power pin
+     * DEPRECATED! power pin is fixed for now
      */
     int32 power_pin_override = 3;
 
@@ -159,12 +160,12 @@ message ModuleConfig {
     bool router_power = 7;
     
     /*
-     * Mode target of the connected router
+     * Mode target for this kiezbox core (and connected router)
      */
     KiezboxMessage.Mode mode = 8;
     
     /*
-     * Mode target of the connected router
+     * Device type of this kiezbox
      */
     KiezboxMessage.DeviceType dev_type = 9;
 
