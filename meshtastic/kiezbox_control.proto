@@ -43,6 +43,7 @@ message KiezboxMessage {
     button = 3;
   }
   // Messages to control one or multiple boxes
+  // The meta field is used to filter for boxes to target
   // Request messages can be used to request a specific response/update from a set of boxes
   message Request {
     Meta meta = 1;
@@ -62,6 +63,10 @@ message KiezboxMessage {
         uint32 dist_id = 6;
         uint32 sens_id = 7;
         int32 status_interval = 8;
+        int32 sds_warmup_time = 9;
+        bool enabled = 10;
+        DeviceType dev_type = 11;
+        int32 button_id = 12;
     }
   }
   // Periodic update message containing optional core or sensor data
