@@ -42,6 +42,32 @@ message KiezboxMessage {
     // The emergency button
     button = 3;
   }
+  // Persistent configuration of the kiezbox control module
+  // Stored by the firmware in its own file, independent of the upstream module config
+  message Config {
+    // Whether the module is enabled
+    bool enabled = 1;
+    // Interval (in milliseconds) at which a status update should be sent
+    int32 status_interval = 2;
+    // Formerly power_pin_override, the power pin is fixed by the variant
+    reserved 3;
+    // ID of the kiezbox
+    int32 box_id = 4;
+    // ID of the district
+    int32 dist_id = 5;
+    // ID of the sensor box
+    int32 sens_id = 6;
+    // Power state target of the connected router
+    bool router_power = 7;
+    // Mode target for this kiezbox core (and connected router)
+    Mode mode = 8;
+    // Device type of this kiezbox
+    DeviceType dev_type = 9;
+    // Warmup time for the sds dust sensor
+    int32 sds_warmup_time = 10;
+    // ID of the emergency button
+    int32 button_id = 11;
+  }
   // Messages to control one or multiple boxes
   // The meta field is used to filter for boxes to target
   // Request messages can be used to request a specific response/update from a set of boxes
