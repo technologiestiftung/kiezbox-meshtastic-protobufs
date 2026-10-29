@@ -172,6 +172,12 @@ message AdminMessage {
      * Mesh Beacon module config
      */
     MESHBEACON_CONFIG = 16;
+
+    /*
+     * TODO: REPLACE
+     * TODO: Test if this works as expected for new values
+     */
+    KIEZBOXCONTROL_CONFIG = 13;
   }
 
   enum BackupLocation {
