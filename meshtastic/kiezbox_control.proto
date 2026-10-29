@@ -76,6 +76,8 @@ message KiezboxMessage {
     optional Type type = 2;
     enum Type {
       Update = 0;
+      // Request the current module config, answered with a config message
+      GetConfig = 1;
     }
   }
   // Control messages can be used to set a variable or other parameter for a set of boxes
@@ -93,6 +95,8 @@ message KiezboxMessage {
         bool enabled = 10;
         DeviceType dev_type = 11;
         int32 button_id = 12;
+        // Replace the whole module config
+        Config config = 13;
     }
   }
   // Periodic update message containing optional core or sensor data
@@ -196,4 +200,7 @@ message KiezboxMessage {
   optional Update update = 4;
   optional Control control = 5;
   optional Emergency distress = 6;
+  optional Request request = 7;
+  // Current module config, sent in response to a GetConfig request
+  optional Config config = 8;
 }
