@@ -300,12 +300,6 @@ enum PortNum {
    * ENCODING: libcotshrink
    */
   ATAK_FORWARDER = 257;
-  
-  /*
-   * Reserved for Kiezbox Control.
-   * ENCODING: Protobuf
-   */
-  KIEZBOX_CONTROL_APP = 258;
 
   /*
    * Currently we limit port nums to no higher than this value

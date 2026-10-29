@@ -13,6 +13,13 @@ option swift_prefix = "";
  * KIEZBOX_CONTROL_APP PortNums.
  */
 message KiezboxMessage {
+  // Port number used for kiezbox messages
+  // Taken from the private range (256-511) of meshtastic.PortNum, so it is
+  // not registered upstream and portnums.proto stays unmodified
+  enum PortNum {
+    UNKNOWN_APP = 0;
+    KIEZBOX_CONTROL_APP = 258;
+  }
   // Meta information identifying the box
   // Also used as tags in the Database
   message Meta {
