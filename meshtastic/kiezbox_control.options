@@ -1,2 +1,3 @@
-*KiezboxMessage.KiezboxStatus.box_id int_size:8
-*KiezboxMessage.KiezboxStatus.dist_id int_size:8
+*KiezboxMessage.Router.sw_version max_size:32
+*KiezboxMessage.Router.model max_size:32
+*KiezboxMessage.Emergency.message max_size:64
