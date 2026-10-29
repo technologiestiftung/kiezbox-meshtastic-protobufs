@@ -27,8 +27,8 @@ message KiezboxMessage {
     optional uint32 box_id = 1; // only 8 bit used
     // ID of the district the box is assigned to
     optional uint32 dist_id = 2; // only 8 bit used
-    // ID of the sensor if this is a sensor module
-    optional uint32 sens_id = 3;
+    // Formerly sens_id of the removed sensor boxes
+    reserved 3;
     // Which type of device the controller should be
     optional DeviceType dev_type = 4;
   }
@@ -62,16 +62,16 @@ message KiezboxMessage {
     int32 box_id = 4;
     // ID of the district
     int32 dist_id = 5;
-    // ID of the sensor box
-    int32 sens_id = 6;
+    // Formerly sens_id of the removed sensor boxes
+    reserved 6;
     // Power state target of the connected router
     bool router_power = 7;
     // Mode target for this kiezbox core (and connected router)
     Mode mode = 8;
     // Device type of this kiezbox
     DeviceType dev_type = 9;
-    // Warmup time for the sds dust sensor
-    int32 sds_warmup_time = 10;
+    // Formerly sds_warmup_time of the removed sensor boxes
+    reserved 10;
     // ID of the emergency button
     int32 button_id = 11;
   }
@@ -89,6 +89,8 @@ message KiezboxMessage {
   }
   // Control messages can be used to set a variable or other parameter for a set of boxes
   message Control {
+    // Formerly sens_id and sds_warmup_time of the removed sensor boxes
+    reserved 7, 9;
     Meta meta = 1;
     oneof set {
         Mode mode = 2;
@@ -96,9 +98,7 @@ message KiezboxMessage {
         bool router_power = 4;
         uint32 box_id = 5;
         uint32 dist_id = 6;
-        uint32 sens_id = 7;
         int32 status_interval = 8;
-        int32 sds_warmup_time = 9;
         bool enabled = 10;
         DeviceType dev_type = 11;
         int32 button_id = 12;
@@ -106,13 +106,14 @@ message KiezboxMessage {
         Config config = 13;
     }
   }
-  // Periodic update message containing optional core or sensor data
+  // Periodic update message containing core data
   message Update {
     Meta meta = 1;
     // Unix timestamp ( in seconds ), when the measurements were taken
     int64 unix_time = 2;
     optional Core core = 3;
-    optional Sensor sensor = 4;
+    // Formerly the values of the removed sensor boxes
+    reserved 4;
     // Unix timestamp ( in seconds ), when the measurements arrived at the database gateway
     optional int64 arrival_time = 5;
   }
@@ -134,12 +135,8 @@ message KiezboxMessage {
   }
   // Sensor values measured at the core
   message CoreValues {
-    // Temperature outside (C)
-    optional int32 temp_out = 1;
-    // Temperature inside (C)
-    optional int32 temp_in = 2;
-    // Relative humidity inside (%)
-    optional int32 humid_in = 3;
+    // Formerly temp_out, temp_in and humid_in of the removed DS18B20 and DHT22
+    reserved 1 to 3;
     // Voltage of the solar panel (V)
     optional int32 solar_voltage = 4;
     // Power output of the solar panel (W)
@@ -154,33 +151,6 @@ message KiezboxMessage {
     optional int32 battery_current = 9;
     // Temperature of the realtime clock (C)
     optional int32 temp_rtc = 10;
-  }
-  // Contains a set of sensor values and a sensor id
-  message Sensor {
-    SensorValues values = 1;
-  }
-  // Sensor values measured at the sensor module
-  message SensorValues {
-    // [ BME Sensor ]
-    // Temperature (C)
-    optional int32 temp_main = 1;
-    // Humidity (%)
-    optional int32 humid_main = 2;
-    // Pressue (Pa)
-    optional int32 pressure = 3;
-    // Air Quality (??)
-    optional int32 air_quality = 4;
-    // Particles
-    // particles 1um (??)
-    optional int32 part_pm25 = 5;
-    // particles 2.5um (??)
-    optional int32 part_pm10 = 6;
-    // Noise (??)
-    optional int32 noise = 7;
-    // Temperature of the rtc (C)
-    optional int32 temp_rtc = 8;
-    // Voltage of the (main) battery (V)
-    optional int32 battery_voltage = 9;
   }
   message Emergency {
     // Type of the emergency
