@@ -151,6 +151,12 @@ message KiezboxMessage {
     optional int32 battery_current = 9;
     // Temperature of the realtime clock (C)
     optional int32 temp_rtc = 10;
+    // Temperature inside the box (C)
+    optional int32 temp_in = 11;
+    // Relative humidity inside the box (%)
+    optional int32 humid_in = 12;
+    // Barometric pressure (hPa)
+    optional int32 pressure = 13;
   }
   message Emergency {
     // Type of the emergency
